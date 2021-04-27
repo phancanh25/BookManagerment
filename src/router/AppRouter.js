@@ -6,7 +6,6 @@ import BooksList from '../components/BooksList';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 const AppRouter = () => {
-
   const [books, setBooks] = useLocalStorage('books', []);
 
   return (
@@ -15,11 +14,16 @@ const AppRouter = () => {
         <Header />
         <div className="main-content">
           <Switch>
-            <Route component={BooksList} path="/" exact={true} />
-            {/* <Route component={AddBook} path="/add" /> */}
             <Route
               render={(props) => (
-                <AddBook {...props} books={books} setBooks = {setBooks}/>
+                <BooksList {...props} books={books} setBooks={setBooks} />
+              )}
+              path="/"
+              exact={true}
+            />
+            <Route
+              render={(props) => (
+                <AddBook {...props} books={books} setBooks={setBooks} />
               )}
               path="/add"
             />
